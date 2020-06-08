@@ -1,4 +1,8 @@
 package clases;
+/*
+* @author Raul Manauta
+* @version 1.0
+*/
 
 public class Articulos {
 	private String codigoArticulo;

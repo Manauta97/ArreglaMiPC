@@ -1,5 +1,9 @@
 package clases;
 
+/*
+* @author Raul Manauta
+* @version 1.0
+*/
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,9 +11,96 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class IoDatos {
+
+	/*
+	 * conexion a la base de datos
+	 */
+	private final String URL = "jdbc:mysql://localhost:3306/arreglapc";
+	private final String USUARIO = "root";
+	private final String PASSWORD = "castelseras";
+	private Connection con;
+
+	private void conectar() {
+		try {
+			con = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void desconectar() {
+		try {
+			con.close();
+			con = null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void guardarClienteBBDD(Clientes vClientes) {
+		conectar();
+		PreparedStatement pt = null;
+
+		try {
+
+			pt = con.prepareStatement("INSERT INTO Clientes(nombre, dni) VALUES (?,?);");
+			pt.setString(1, vClientes.getNombre());
+			pt.setString(2, vClientes.getDni());
+
+			pt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				pt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		desconectar();
+	}
+
+	public void guardarventaBBDD(Clientes vClientes, Articulos[] vArticulos) {
+
+		conectar();
+		PreparedStatement pt = null;
+
+		try {
+
+			pt = con.prepareStatement("INSERT INTO Ventas(nombre, codigo, coste) VALUES (?,?);");
+			pt.setString(1, ((Clientes) vClientes).getNombre());
+			pt.setString(2, vArticulos.toString());
+			
+
+			pt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				pt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		desconectar();
+	}
 
 	public static void guardarPers(ArrayList<Clientes> vClientes) {
 

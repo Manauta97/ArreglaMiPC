@@ -1,4 +1,8 @@
 package interfaz;
+/*
+* @author Raul Manauta
+* @version 1.0
+*/
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -8,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clases.Articulos;
+import clases.Clientes;
 import clases.IoDatos;
 
 import javax.swing.JLabel;
@@ -20,6 +25,11 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class itfarticulos extends JFrame {
 
@@ -29,11 +39,12 @@ public class itfarticulos extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JComboBox comboBox;
-	private JComboBox comboBox_A;
+	private JComboBox lblArticulo;
 	private JButton btnNewButton_1;
-	private JLabel lblNewLabel_3;
+	private JLabel lblCliente;
 	private DefaultComboBoxModel listaArticulos;
 	private Articulos[] vArticulos;
+	private ArrayList<Clientes> vClientes;
 
 	/**
 	 * Launch the application.
@@ -66,11 +77,12 @@ public class itfarticulos extends JFrame {
 
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\Desktop\\proyecto BBDD\\img\\codigo (1).png"));
+		lblNewLabel.setIcon(new ImageIcon("../ArreglaMiPc//img//codigo .png"));
 		lblNewLabel.setBounds(0, 0, 342, 160);
 		contentPane.add(lblNewLabel);
 
 		btnNewButton = new JButton("Aceptar compra");
+		btnNewButton.addMouseListener(new BtnNewButtonMouseListener());
 		btnNewButton.setBounds(162, 366, 132, 34);
 		contentPane.add(btnNewButton);
 
@@ -92,24 +104,23 @@ public class itfarticulos extends JFrame {
 		comboBox.setBounds(142, 204, 152, 20);
 		contentPane.add(comboBox);
 
-		comboBox_A = new JComboBox();
-		comboBox_A.addMouseListener(new ComboBox_AMouseListener());
+		lblArticulo = new JComboBox();
+		lblArticulo.addMouseListener(new ComboBox_AMouseListener());
 		listaArticulos = new DefaultComboBoxModel<>();
-		comboBox_A.setModel(listaArticulos);
-		comboBox_A.setBounds(142, 269, 152, 20);
-		contentPane.add(comboBox_A);
+		lblArticulo.setModel(listaArticulos);
+		lblArticulo.setBounds(142, 269, 152, 20);
+		contentPane.add(lblArticulo);
 
 		btnNewButton_1 = new JButton("Volver");
 		btnNewButton_1.addMouseListener(new BtnNewButton_1MouseListener());
 		btnNewButton_1.setBounds(205, 432, 89, 23);
 		contentPane.add(btnNewButton_1);
 
-		lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(
-				new ImageIcon("C:\\Users\\Usuario\\Desktop\\proyecto BBDD\\img\\67e7270116d00627ef4a393e915cd76f.jpg"));
-		lblNewLabel_3.setBounds(0, 0, 325, 498);
-		contentPane.add(lblNewLabel_3);
-		
+		lblCliente = new JLabel("");
+		lblCliente.setIcon(new ImageIcon("..//ArreglaMiPc//img//fondo1.jpg"));
+		lblCliente.setBounds(0, 0, 325, 498);
+		contentPane.add(lblCliente);
+
 	}
 
 	private class BtnNewButton_1MouseListener extends MouseAdapter {
@@ -129,6 +140,38 @@ public class itfarticulos extends JFrame {
 					listaArticulos.addElement(ar.getCodigoArticulo());
 				}
 			}
+
+		}
+	}
+
+	private class BtnNewButtonMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			IoDatos io = new IoDatos();
+
+			File fichero = new File("datos/ficheroCompra.txt");
+			FileWriter fw;
+
+			if (!fichero.exists()) {
+				try {
+					fichero.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try {
+				fw = new FileWriter(fichero);
+
+				fw.write(lblArticulo.getSelectedItem().toString() + "\n");
+				fw.write(comboBox.getSelectedItem().toString() + "\n");
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//io.guardarventaBBDD(vClientes, vArticulos);
 
 		}
 	}

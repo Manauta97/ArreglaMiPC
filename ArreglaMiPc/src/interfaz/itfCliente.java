@@ -1,4 +1,8 @@
 package interfaz;
+/*
+* @author Raul Manauta
+* @version 1.0
+*/
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -59,7 +63,7 @@ public class itfCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public itfCliente() {
-		//IoDatos.cargarClientes();
+		IoDatos.cargarClientes(vClientes);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 414, 518);
@@ -70,7 +74,7 @@ public class itfCliente extends JFrame {
 
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\Desktop\\proyecto BBDD\\img\\codigo (1).png"));
+		lblNewLabel.setIcon(new ImageIcon("../ArreglaMiPc//img//codigo .png"));
 		lblNewLabel.setBounds(0, 0, 175, 158);
 		contentPane.add(lblNewLabel);
 
@@ -118,8 +122,7 @@ public class itfCliente extends JFrame {
 		contentPane.add(textArea);
 
 		lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(
-				new ImageIcon("C:\\Users\\Usuario\\Desktop\\proyecto BBDD\\img\\67e7270116d00627ef4a393e915cd76f.jpg"));
+		lblNewLabel_3.setIcon(new ImageIcon("..//ArreglaMiPc//img//fondo1.jpg"));
 		lblNewLabel_3.setBounds(0, 0, 398, 479);
 		contentPane.add(lblNewLabel_3);
 
@@ -145,13 +148,18 @@ public class itfCliente extends JFrame {
 				concuerda = true;
 			} else {
 				JOptionPane.showMessageDialog(null, "Dni mal introducido", "Dni mal introducido", 1);
+				concuerda = false;
+				txtdni.setText("");
+				txtnombre.setText("");
+			}
+			if (concuerda) {
+				Clientes cli = new Clientes(txtnombre.getText(), txtdni.getText());
+				IoDatos.guardarPers(vClientes);
+				JOptionPane.showMessageDialog(null, "Se Ha Guardado Con Exito", "Guardado Completado", 1);
+				txtdni.setText("");
+				txtnombre.setText("");
 			}
 
-			Clientes cli = new Clientes(txtnombre.getText(), txtdni.getText());
-			IoDatos.guardarPers(vClientes);
-			JOptionPane.showMessageDialog(null, "Se Ha Guardado Con Exito", "Guardado Completado", 1);
-			txtdni.setText("");
-			txtnombre.setText("");
 		}
 	}
 

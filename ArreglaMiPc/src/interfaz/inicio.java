@@ -1,4 +1,8 @@
 package interfaz;
+/*
+* @author Raul Manauta
+* @version 1.0
+*/
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -52,24 +56,24 @@ public class inicio extends JFrame {
 		
 		btnNewButton = new JButton("");
 		btnNewButton.addMouseListener(new BtnNewButtonMouseListener());
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Usuario\\Desktop\\proyecto BBDD\\img\\registro (1).png"));
+		btnNewButton.setIcon(new ImageIcon("..//ArreglaMiPc//img//registro.png"));
 		btnNewButton.setBounds(49, 367, 76, 73);
 		contentPane.add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("");
 		btnNewButton_1.addMouseListener(new BtnNewButton_1MouseListener());
-		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Desktop\\proyecto BBDD\\img\\vender.png"));
+		btnNewButton_1.setIcon(new ImageIcon("..//ArreglaMiPC//img//vender.png"));
 		btnNewButton_1.setBounds(180, 367, 97, 73);
 		contentPane.add(btnNewButton_1);
 		
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\Desktop\\proyecto BBDD\\img\\codigo (1).png"));
+		lblNewLabel.setIcon(new ImageIcon("../ArreglaMiPc//img//codigo .png"));
 		lblNewLabel.setBounds(0, 0, 316, 196);
 		contentPane.add(lblNewLabel);
 		
 		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Desktop\\proyecto BBDD\\img\\67e7270116d00627ef4a393e915cd76f.jpg"));
+		lblNewLabel_1.setIcon(new ImageIcon("..//ArreglaMiPc//img//fondo1.jpg"));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(0, 0, 316, 528);
 		contentPane.add(lblNewLabel_1);
